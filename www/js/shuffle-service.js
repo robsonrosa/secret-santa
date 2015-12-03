@@ -12,7 +12,7 @@ angular.module('santa')
 	
 	function shuffle(list) {
 		var raffle = [];
-		var notPicked = Array(list.length).fill().map((x,i)=>i);
+		var notPicked = fillArray(list.length);
 		
 		for(var i = 0; i < list.length; i++) {
 			// se chegou ao fim e o último é a última opção sorteável, então recomeça
@@ -26,6 +26,14 @@ angular.module('santa')
 		}
 		
 		return raffle;
+	}
+
+	function fillArray(length) {
+		var arr = [];
+		for (var i = 0; i < length; i++) {
+			arr.push(i);
+		}
+		return arr;
 	}
 	
 	function getNextIndex(notPicked, currentIndex) {
