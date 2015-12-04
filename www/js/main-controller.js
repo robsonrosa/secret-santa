@@ -28,10 +28,12 @@ angular.module('santa').controller('MainCtrl', ['$scope', 'storage', 'shuffle', 
 			if (item.viewed) {
 				popup.alert('Você já escolheu seu amigo secreto.');
 			} else {
-				popup.show('Seu amigo secreto é', item.secret);
+				popup.confirm(item.friend + ', é você mesmo?!').then(function() {
+					popup.show('Seu amigo secreto é', item.secret);
+					item.viewed = true;
+				});
 			}
 
-			item.viewed = true;
 			updateStorage(list, true);	
 		})
 		.catch(function(error) {
