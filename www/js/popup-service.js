@@ -31,6 +31,14 @@ angular.module('santa')
      			title: defaultTitle,
      			template: message
    			});
+		},
+
+		show: function(message, name) {
+			return $ionicPopup.alert({
+     			title: defaultTitle,
+     			template: '<div class="show-secret"><p>' + message + '</p>' + '<span>' + name + '</span></div>',
+				okText: 'FECHAR'
+   			});
 		}
 	};
 }]);

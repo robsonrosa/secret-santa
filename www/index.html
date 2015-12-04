@@ -34,13 +34,13 @@
       <ion-content>
 		   <form ng-submit="addFriend()" ng-controller="MainCtrl">
 
-			  <input type="text" ng-model="newFriend" placeholder="nome do participante" autofocus>
-			  <button type="button" ng-click="addFriend()" ng-disabled="ready || !newFriend">Add</button>
-			  <button type="button" ng-click="reset()" ng-disabled="raffle.length === 0">Reset</button>
+        <input type="text" ng-model="newFriend" placeholder="nome do participante" ng-show="!ready" autofocus>
+        <button type="button" ng-click="addFriend()" class="ok" ng-disabled="ready || !newFriend">Add</button>
+        <button type="button" ng-click="reset()" class="cancel" ng-disabled="raffle.length === 0">Reset</button>
 
-			  <ul>
-				  <li ng-repeat="item in raffle"><a href="#" ng-click="pick(item)">{{item.friend}}</a></li>
-			  </ul>
+        <ul>
+          <li ng-repeat="item in raffle | orderBy: ['viewed', 'friend']" ng-class="item.viewed ? 'ok' : 'pending'"><a href="#" ng-click="pick(item)">{{item.friend}}</a></li>
+        </ul>
 		  </form>
       </ion-content>
     </ion-pane>

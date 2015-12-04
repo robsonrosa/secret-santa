@@ -1,1 +1,70 @@
-/* Empty. Add your own CSS if you like */
+body, button, input, a {
+	font-family: 'Segoe UI';
+}
+
+form {
+	padding: 25px;
+}
+
+button {
+    padding: 5px;
+    margin-right: 10px;
+    border: 0;
+    color: white;
+    width: 75px;
+}
+
+button.ok:not([disabled]) {
+    background-color: #279B61;
+}
+
+button.cancel:not([disabled]) {
+    background-color: #CC3333;
+}
+
+button.button.button-positive {
+	border-color: #279B61;
+    background-color: #279B61;
+}
+
+button.button.button-positive:focus {
+	border-color: #30AC70;
+    background-color: #30AC70;
+}
+
+ul {
+	margin-top: 25px;
+}
+
+li {
+	margin: 3px 0;
+	font-size: 16px;
+    padding-left: 1em; 
+    text-indent: -.7em;
+}
+
+li:before {
+	font-size: 30px;
+    content: "• ";
+    color: #279B61;
+}
+
+li.ok a {
+	text-decoration: line-through;
+}
+
+a {
+    vertical-align: top;
+    line-height: 24px;
+    text-decoration: none;
+    color: #333;
+}
+
+.show-secret {
+    text-align: center;
+}
+
+.show-secret span {
+    font-size: 30px;
+    line-height: 60px;
+}

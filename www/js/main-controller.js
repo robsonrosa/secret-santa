@@ -25,7 +25,13 @@ angular.module('santa').controller('MainCtrl', ['$scope', 'storage', 'shuffle', 
 	$scope.pick = function(item) {
 		shuffle.run($scope.raffle)
 		.then(function(list) {
-			popup.alert(getPickMessage(item));
+
+			if (item.viewed) {
+				popup.alert('Você já escolheu seu amigo secreto.');
+			} else {
+				popup.show('Seu amigo secreto é', item.secret);
+			}
+
 			item.viewed = true;
 			updateStorage(list, true);	
 		})
@@ -33,10 +39,6 @@ angular.module('santa').controller('MainCtrl', ['$scope', 'storage', 'shuffle', 
 			popup.alert(error);
 		})
 	};
-	
-	function getPickMessage(item) {
-		return item.viewed ? 'Você já escolheu seu amigo secreto. ' : 'Seu amigo secreto é ' + item.secret;
-	}
 	
 	function updateStorage(list, ready) {
 		$scope.ready = angular.isDefined(ready) ? ready : $scope.ready;
