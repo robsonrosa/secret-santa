@@ -4,20 +4,19 @@ angular.module('santa').controller('MainCtrl', ['$scope', 'storage', 'shuffle', 
 	$scope.raffle = storage.getArray('raffle');
 	
 	$scope.addFriend = function() {
-		if (!$scope.newFriend) return;
-		
-		if ($scope.raffle.indexOf($scope.newFriend) >= 0) {
-			popup.alert('O nome ' + $scope.newFriend + ' já foi adicionado!');
-			return;
+		var friend = $scope.newFriend;
+
+		if (alreadyAdded(friend)) {
+			return popup.alert('O nome ' + friend + ' já foi adicionado!').then(clearNewFriendField);
 		} 
 		
-		$scope.raffle.push({ friend: $scope.newFriend, secret: null, viewed: false });
-		$scope.newFriend = null;
-		updateStorage();
+		addNewFriend(friend);
+		clearNewFriendField();
 	};
 	
 	$scope.reset = function() {
 		popup.confirm().then(function() {
+			clearNewFriendField();
 			updateStorage([], false);
 		});
 	};
@@ -39,10 +38,25 @@ angular.module('santa').controller('MainCtrl', ['$scope', 'storage', 'shuffle', 
 			popup.alert(error);
 		})
 	};
+
+	function addNewFriend(friend) {
+		$scope.raffle.push({ friend: friend, secret: null, viewed: false });
+		updateStorage();
+	}
+
+	function clearNewFriendField() {
+		$scope.newFriend = null;
+	}
+
+	function alreadyAdded(friend) {
+		var friendsLowerCase = $scope.raffle.map(function(x) { return x.friend.toLowerCase(); });
+		return friendsLowerCase.indexOf(friend.toLowerCase()) > -1;
+	}
 	
 	function updateStorage(list, ready) {
 		$scope.ready = angular.isDefined(ready) ? ready : $scope.ready;
 		$scope.raffle = angular.isDefined(list) ? list : $scope.raffle;
+
 		storage.set('ready', $scope.ready);
 		storage.setArray('raffle',$scope.raffle);
 	}
