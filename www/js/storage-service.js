@@ -1,6 +1,6 @@
 angular.module('santa')
 
-.factory('raffleStorage', ['$window', function($window) {
+.factory('storage', ['$window', function($window) {
 
 	var readyKey = 'ready';
 	var raffleKey = 'raffle';

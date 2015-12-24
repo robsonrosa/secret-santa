@@ -1,4 +1,4 @@
-angular.module('santa').controller('MainCtrl', ['$scope', 'raffleStorage', 'shuffle', 'popup', function ($scope, storage, shuffle, popup) {
+angular.module('santa').controller('MainCtrl', ['$scope', 'storage', 'shuffle', 'popup', function ($scope, storage, shuffle, popup) {
 	
 	$scope.ready = storage.isReady();
 	$scope.raffle = storage.getRaffle();
