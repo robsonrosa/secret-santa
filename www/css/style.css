@@ -43,7 +43,7 @@ li {
     text-indent: -.7em;
 }
 
-li:before {
+li.ready:before {
 	font-size: 30px;
     content: "• ";
     color: #279B61;
@@ -67,4 +67,12 @@ a {
 .show-secret span {
     font-size: 30px;
     line-height: 60px;
+}
+
+.remove-icon:before {
+    content: "x";
+    color: #CC3333;
+    font-size: 14px;
+    vertical-align: middle;
+    margin-right: 10px;
 }

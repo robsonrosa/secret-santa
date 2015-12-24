@@ -32,16 +32,20 @@
         <h1 class="title">Amigo Secreto</h1>
       </ion-header-bar>
       <ion-content>
-		   <form ng-submit="addFriend()" ng-controller="MainCtrl">
+        <form ng-submit="add()" ng-controller="MainCtrl">
 
-        <input type="text" ng-model="newFriend" placeholder="nome do participante" ng-show="!ready" autofocus>
-        <button type="button" ng-click="addFriend()" class="ok" ng-disabled="ready || !newFriend">Add</button>
-        <button type="button" ng-click="reset()" class="cancel" ng-disabled="raffle.length === 0">Reset</button>
+          <input type="text" ng-model="newFriend" placeholder="nome do participante" ng-show="!ready" autofocus>
+          <button type="button" ng-click="add()" class="ok" ng-disabled="ready || !newFriend">Add</button>
+          <button type="button" ng-click="reset()" class="cancel" ng-disabled="raffle.length === 0">Reset</button>
 
-        <ul>
-          <li ng-repeat="item in raffle | orderBy: ['viewed', 'friend']" ng-class="item.viewed ? 'ok' : 'pending'"><a href="#" ng-click="pick(item)">{{item.friend}}</a></li>
-        </ul>
-		  </form>
+          <ul>
+            <li ng-repeat="item in raffle | orderBy: ['viewed', 'friend']" 
+                ng-class="{'ok': item.viewed, 'pending': !item.viewed, 'ready': ready}">
+              <a href="#" ng-click="remove(item)" ng-if="!ready" class="remove-icon"></a>
+              <a href="#" ng-click="pick(item)">{{item.friend}}</a>
+            </li>
+          </ul>
+        </form>
       </ion-content>
     </ion-pane>
   </body>
