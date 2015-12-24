@@ -34,16 +34,15 @@ angular.module('santa').controller('MainCtrl', ['$scope', 'raffleStorage', 'shuf
 					markAsViewed(item, list);
 				});
 			}
-			
-			updateStorage(list, true);
-		})
-		.catch(function(error) {
+
+		}).catch(function(error) {
 			popup.alert(error);
 		})
 	};
 
 	function markAsViewed (item, list) {
 		item.viewed = true;
+		updateStorage(list, true);
 	}
 
 	function addNewFriend(friend) {
