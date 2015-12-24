@@ -3,7 +3,7 @@ angular.module('santa').controller('MainCtrl', ['$scope', 'storage', 'shuffle', 
 	$scope.ready = storage.isReady();
 	$scope.raffle = storage.getRaffle();
 	
-	$scope.addFriend = function() {
+	$scope.addFriend = function () {
 		var friend = $scope.newFriend;
 
 		if (alreadyAdded(friend)) {
@@ -16,14 +16,14 @@ angular.module('santa').controller('MainCtrl', ['$scope', 'storage', 'shuffle', 
 		updateStorage();
 	};
 	
-	$scope.reset = function() {
+	$scope.reset = function () {
 		popup.confirm().then(function() {
 			clearNewFriendField();
-			storage.clean();
+			cleanStorage();
 		});
 	};
 	
-	$scope.pick = function(item) {
+	$scope.pick = function (item) {
 		shuffle.run($scope.raffle).then(function(list) {
 
 			if (item.viewed) {
@@ -45,20 +45,24 @@ angular.module('santa').controller('MainCtrl', ['$scope', 'storage', 'shuffle', 
 		updateStorage(list, true);
 	}
 
-	function addNewFriend(friend) {
+	function addNewFriend (friend) {
 		$scope.raffle.push({ friend: friend, secret: null, viewed: false });
 	}
 
-	function clearNewFriendField() {
+	function clearNewFriendField () {
 		$scope.newFriend = null;
 	}
 
-	function alreadyAdded(friend) {
+	function alreadyAdded (friend) {
 		var friendsLowerCase = $scope.raffle.map(function(x) { return x.friend.toLowerCase(); });
 		return friendsLowerCase.indexOf(friend.toLowerCase()) > -1;
 	}
+
+	function cleanStorage () {
+		updateStorage([], false);
+	}
 	
-	function updateStorage(list, ready) {
+	function updateStorage (list, ready) {
 		$scope.ready = angular.isDefined(ready) ? ready : $scope.ready;
 		$scope.raffle = angular.isDefined(list) ? list : $scope.raffle;
 
