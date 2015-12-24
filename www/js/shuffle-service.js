@@ -62,7 +62,7 @@ angular.module('santa')
 				deferred.reject('Você precisa urgentemente de novos amigos!');
 			}
 			
-			else if (storage.getBoolean('ready')) {
+			else if (storage.isReady()) {
 				deferred.resolve(list);
 			} 
 			
