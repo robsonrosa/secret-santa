@@ -1,0 +1,17 @@
+{
+	"title": "Amigo Secreto",
+	"the_secret": "Seu amigo secreto é",
+
+	"button.add": "Novo",
+	"button.reset": "Limpar",
+
+	"error.forever_alone": "Você precisa urgentemente de novos amigos!",
+	"error.already_added": "O nome '{{name}}' já foi adicionado!",
+	"error.already_viewed": "Você já escolheu seu amigo secreto.",
+
+	"confirmation.view": "{{name}}, é você mesmo?!",
+	"confirmation.message": "Você tem certeza?",
+	"confirmation.ok": "Sim",
+	"confirmation.cancel": "Não",
+	"confirmation.close": "FECHAR"
+}

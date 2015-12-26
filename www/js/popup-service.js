@@ -1,26 +1,29 @@
 angular.module('santa')
 
-.factory('popup', ['$ionicPopup', '$q', function($ionicPopup, $q) {
-	var defaultTitle = 'Amigo Secreto';
-	var defaultMessage = 'Você tem certeza?';
-	var defaultConfirm = 'Sim';
-	var defaultDismiss = 'Não';
-	
+.factory('popup', ['$ionicPopup', '$q', '$translate', function($ionicPopup, $q, $translate) {
+
+	var defaults = {};
+
+	$translate.onReady(function() {
+		defaults.caption = $translate.instant('title');
+		defaults.confirm = $translate.instant('confirmation.ok');
+		defaults.toclose = $translate.instant('confirmation.close');
+		defaults.dismiss = $translate.instant('confirmation.cancel');
+		defaults.message = $translate.instant('confirmation.message');
+	});
+
 	return {
 		confirm: function(message, yes, no) {
 			var deferred = $q.defer();
 			
 			$ionicPopup.confirm({
-				title: defaultTitle,
-				template: message || defaultMessage,
-				cancelText: no || defaultDismiss,
-				okText: yes || defaultConfirm
+				title: defaults.caption,
+				okText: yes || defaults.confirm,
+				cancelText: no || defaults.dismiss,
+				template: message || defaults.message
 			}).then(function(res) {
-				if (res) {
-					deferred.resolve(true);
-				} else {
-					deferred.reject();
-				}
+				if (res) deferred.resolve(true);
+				else deferred.reject();
 			});
 			
 			return deferred.promise;
@@ -28,16 +31,16 @@ angular.module('santa')
 		
 		alert: function(message) {
 			return $ionicPopup.alert({
-     			title: defaultTitle,
+     			title: defaults.caption,
      			template: message
    			});
 		},
 
 		show: function(message, name) {
 			return $ionicPopup.alert({
-     			title: defaultTitle,
-     			template: '<div class="show-secret"><p>' + message + '</p>' + '<span>' + name + '</span></div>',
-				okText: 'FECHAR'
+     			title: defaults.caption,
+				okText: defaults.toclose,
+     			template: '<div class="show-secret"><p>' + message + '</p>' + '<span>' + name + '</span></div>'
    			});
 		}
 	};

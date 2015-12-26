@@ -1,0 +1,17 @@
+{
+	"title": "Secret Santa",
+	"the_secret": "Your secret friend is",
+	
+	"button.add": "Add",
+	"button.reset": "Reset",
+	
+	"error.forever_alone": "You need immediately for new friends!",
+	"error.already_added": "The name '{{name}}' has already been added!",
+	"error.already_viewed": "You already chosen your secret friend.",
+
+	"confirmation.view": "{{name}}, is that you?!",
+	"confirmation.message": "Are you sure?",
+	"confirmation.ok": "Yes",
+	"confirmation.cancel": "No",
+	"confirmation.close": "CLOSE"
+}

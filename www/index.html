@@ -14,6 +14,8 @@
 
     <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
+    <script src="lib/angular-translate/angular-translate.min.js"></script>
+    <script src="lib/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js"></script>
 
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
@@ -29,14 +31,17 @@
 
     <ion-pane>
       <ion-header-bar class="bar-stable">
-        <h1 class="title">Amigo Secreto</h1>
+        <h1 class="title" translate="title">Amigo Secreto</h1>
+        <div>
+          
+        </div>
       </ion-header-bar>
       <ion-content>
         <form ng-submit="add()" ng-controller="MainCtrl">
 
           <input type="text" ng-model="newFriend" placeholder="nome do participante" ng-show="!ready" autofocus>
-          <button type="button" ng-click="add()" class="ok" ng-disabled="ready || !newFriend">Add</button>
-          <button type="button" ng-click="reset()" class="cancel" ng-disabled="raffle.length === 0">Reset</button>
+          <button type="button" ng-click="add()" class="ok" ng-disabled="ready || !newFriend" translate="button.add">Add</button>
+          <button type="button" ng-click="reset()" class="cancel" ng-disabled="raffle.length === 0" translate="button.reset">Reset</button>
 
           <ul>
             <li ng-repeat="item in raffle | orderBy: ['viewed', 'friend']" 

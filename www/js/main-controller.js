@@ -1,4 +1,5 @@
-angular.module('santa').controller('MainCtrl', ['$scope', 'storage', 'shuffle', 'popup', function ($scope, storage, shuffle, popup) {
+angular.module('santa').controller('MainCtrl', ['$scope', '$translate', 'storage', 'shuffle', 'popup', 
+										function ($scope, $translate, storage, shuffle, popup) {
 	
 	$scope.ready = storage.isReady();
 	$scope.raffle = storage.getRaffle();
@@ -7,7 +8,7 @@ angular.module('santa').controller('MainCtrl', ['$scope', 'storage', 'shuffle', 
 		var friend = $scope.newFriend;
 
 		if (alreadyAdded(friend)) {
-			return popup.alert('O nome ' + friend + ' já foi adicionado!').then(clearNewFriendField);
+			return popup.alert($translate.instant('error.already_added', { name: friend })).then(clearNewFriendField);
 		} 
 		
 		addNewFriend(friend);
@@ -32,10 +33,10 @@ angular.module('santa').controller('MainCtrl', ['$scope', 'storage', 'shuffle', 
 		shuffle.run($scope.raffle).then(function(list) {
 
 			if (item.viewed) {
-				popup.alert('Você já escolheu seu amigo secreto.');
+				popup.alert($translate.instant('error.already_viewed'));
 			} else {
-				popup.confirm(item.friend + ', é você mesmo?!').then(function() {
-					popup.show('Seu amigo secreto é', item.secret);
+				popup.confirm($translate.instant('confirmation.view', { name: item.friend })).then(function() {
+					popup.show($translate.instant('the_secret'), item.secret);
 					markAsViewed(item, list);
 				});
 			}

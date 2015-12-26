@@ -1,6 +1,6 @@
 angular.module('santa')
 
-.factory('shuffle', ['$q', 'storage', function($q, storage) {
+.factory('shuffle', ['$q', '$translate', 'storage', function($q, $translate, storage) {
  	
 	function build(list) {
 		var friends = list.map(function(item){ return item.friend; });
@@ -59,7 +59,7 @@ angular.module('santa')
 			var deferred = $q.defer();
 			
 			if (list.length <= 1) {
-				deferred.reject('Você precisa urgentemente de novos amigos!');
+				deferred.reject($translate.instant('error.forever_alone'));
 			}
 			
 			else if (storage.isReady()) {
