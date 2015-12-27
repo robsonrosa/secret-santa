@@ -7,7 +7,9 @@ angular.module('santa', ['ionic', 'pascalprecht.translate'])
 		suffix: '.json'
 	});
 
-	$translateProvider.preferredLanguage('pt-br');
+	$translateProvider.fallbackLanguage('en-us');
+	$translateProvider.preferredLanguage(navigator.language || navigator.userLanguage);
+	
 	$translateProvider.useSanitizeValueStrategy('sanitize');
 }])
 
